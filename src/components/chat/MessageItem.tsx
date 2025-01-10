@@ -12,7 +12,6 @@ import {
   BoldIcon,
   ItalicIcon,
 } from "@heroicons/react/24/outline";
-import { useAuthStore } from "../../store/authstore";
 import { ReactionPicker } from "./ReactionPicker";
 import { Avatar } from "../shared/Avatar";
 interface MessageItemProps {
@@ -25,7 +24,6 @@ export const MessageItem = ({ message, onThreadClick }: MessageItemProps) => {
   const [showReactionPicker, setShowReactionPicker] = useState(false);
   const [reactionButtonRef, setReactionButtonRef] =
     useState<HTMLButtonElement | null>(null);
-  const user = useAuthStore((state) => state.user);
 
   const editor = useEditor({
     extensions: [StarterKit],
