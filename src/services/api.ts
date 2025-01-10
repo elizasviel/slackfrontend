@@ -3,7 +3,7 @@ import { useAuthStore } from "../store/authstore";
 import { Workspace } from "../types";
 
 const api = axios.create({
-  baseURL: "http://localhost:3000/api",
+  baseURL: "https://salty-hollows-49179-a849d480ad67.herokuapp.com/api",
 });
 
 api.interceptors.request.use((config) => {
