@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { User, DirectMessage } from "../../types";
+import { User } from "../../types";
 import { ChatBubbleLeftIcon } from "@heroicons/react/24/outline";
 import { DirectMessageChat } from "./DirectMessageChat";
 import api from "../../services/api";

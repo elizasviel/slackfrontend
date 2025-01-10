@@ -6,8 +6,6 @@ import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import {
   PencilIcon,
-  CheckIcon,
-  XMarkIcon,
   FaceSmileIcon,
   TrashIcon,
   CommandLineIcon,
@@ -57,8 +55,6 @@ export const MessageItem = ({ message, onThreadClick }: MessageItemProps) => {
 
     setIsEditing(false);
   };
-
-  const canEdit = user?.id === message.userId;
 
   const handleDelete = () => {
     if (window.confirm("Are you sure you want to delete this message?")) {
