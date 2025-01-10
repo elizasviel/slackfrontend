@@ -1,7 +1,7 @@
 import { io } from "socket.io-client";
 import { useAuthStore } from "../store/authstore";
 
-const SOCKET_URL = "http://localhost:3000";
+const SOCKET_URL = "https://salty-hollows-49179-a849d480ad67.herokuapp.com/";
 
 export const socket = io(SOCKET_URL, {
   auth: {
