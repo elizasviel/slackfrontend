@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Message, Reaction } from "../../types";
 import { format } from "date-fns";
 import { socket } from "../../services/socket";
@@ -14,6 +14,8 @@ import {
 } from "@heroicons/react/24/outline";
 import { ReactionPicker } from "./ReactionPicker";
 import { Avatar } from "../shared/Avatar";
+import { useAuthStore } from "../../store/authstore";
+
 interface MessageItemProps {
   message: Message;
   onThreadClick?: (message: Message) => void;
@@ -24,6 +26,11 @@ export const MessageItem = ({ message, onThreadClick }: MessageItemProps) => {
   const [showReactionPicker, setShowReactionPicker] = useState(false);
   const [reactionButtonRef, setReactionButtonRef] =
     useState<HTMLButtonElement | null>(null);
+
+  const currentUser = useAuthStore((state) => state.user);
+
+  // Add this near other useState declarations
+  const isOwnMessage = currentUser?.id === message.user.id;
 
   const editor = useEditor({
     extensions: [StarterKit],
@@ -62,6 +69,12 @@ export const MessageItem = ({ message, onThreadClick }: MessageItemProps) => {
       });
     }
   };
+
+  useEffect(() => {
+    console.log("CURRENT USER", currentUser);
+    console.log("MESSAGE DOT USER", message.user);
+    console.log("IS OWN MESSAGE", isOwnMessage);
+  }, [isOwnMessage]);
 
   return (
     <div className="group hover:bg-gray-50 px-4 py-2 rounded-lg transition-colors">
@@ -213,21 +226,25 @@ export const MessageItem = ({ message, onThreadClick }: MessageItemProps) => {
         </div>
 
         {/* Message actions */}
-        <div className="flex items-center gap-2 group-hover:opacity-100 transition-opacity">
-          <button
-            onClick={() => setIsEditing(true)}
-            className="p-1 text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-100"
-            title="Edit message"
-          >
-            <PencilIcon className="h-4 w-4" />
-          </button>
-          <button
-            onClick={handleDelete}
-            className="p-1 text-gray-400 hover:text-red-600 rounded-full hover:bg-gray-100"
-            title="Delete message"
-          >
-            <TrashIcon className="h-4 w-4" />
-          </button>
+        <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+          {isOwnMessage && (
+            <>
+              <button
+                onClick={() => setIsEditing(true)}
+                className="p-1 text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-100"
+                title="Edit message"
+              >
+                <PencilIcon className="h-4 w-4" />
+              </button>
+              <button
+                onClick={handleDelete}
+                className="p-1 text-gray-400 hover:text-red-600 rounded-full hover:bg-gray-100"
+                title="Delete message"
+              >
+                <TrashIcon className="h-4 w-4" />
+              </button>
+            </>
+          )}
         </div>
       </div>
     </div>

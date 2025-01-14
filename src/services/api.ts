@@ -3,7 +3,7 @@ import { useAuthStore } from "../store/authstore";
 import { Workspace } from "../types";
 
 const api = axios.create({
-  baseURL: "https://salty-hollows-49179-a849d480ad67.herokuapp.com/api",
+  baseURL: "http://localhost:3000/api",
 });
 
 api.interceptors.request.use((config) => {
@@ -13,6 +13,17 @@ api.interceptors.request.use((config) => {
   }
   return config;
 });
+
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      useAuthStore.getState().logout();
+      window.location.href = "/login";
+    }
+    return Promise.reject(error);
+  }
+);
 
 export const login = async (email: string, password: string) => {
   const response = await api.post("/auth/login", { email, password });
