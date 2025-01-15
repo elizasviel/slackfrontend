@@ -14,6 +14,7 @@ import {
   ListBulletIcon,
   NumberedListIcon,
 } from "@heroicons/react/24/outline";
+import { SearchMessages } from "./SearchMessages";
 
 interface ChatAreaProps {
   channel: Channel;
@@ -249,8 +250,8 @@ export const ChatArea = ({ channel }: ChatAreaProps) => {
     <div className="flex h-full">
       <div className={`flex flex-col ${selectedThread ? "w-7/12" : "w-full"}`}>
         <div className="flex-none p-4 border-b bg-white shadow-sm">
-          <div className="flex items-center justify-between">
-            <div>
+          <div className="flex items-center space-x-4">
+            <div className="flex-shrink-0">
               <h2 className="text-lg font-semibold text-gray-900">
                 #{channel.name}
               </h2>
@@ -260,7 +261,17 @@ export const ChatArea = ({ channel }: ChatAreaProps) => {
                 </p>
               )}
             </div>
-            {/* Add channel actions here if needed */}
+            <div className="flex-grow">
+              <SearchMessages
+                channelId={channel.id}
+                onMessageClick={(messageId) => {
+                  const element = document.getElementById(
+                    `message-${messageId}`
+                  );
+                  element?.scrollIntoView({ behavior: "smooth" });
+                }}
+              />
+            </div>
           </div>
         </div>
 

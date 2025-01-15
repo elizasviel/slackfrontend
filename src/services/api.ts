@@ -3,7 +3,7 @@ import { useAuthStore } from "../store/authstore";
 import { Workspace } from "../types";
 
 const api = axios.create({
-  baseURL: "http://localhost:3000/api",
+  baseURL: "https://slackclone-4768892ccc31.herokuapp.com/api",
 });
 
 api.interceptors.request.use((config) => {
