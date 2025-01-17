@@ -89,7 +89,7 @@ export const Workspaces = () => {
                   onClick={() => setSelectedWorkspace(workspace)}
                   className={`flex items-center w-full p-3 rounded-lg transition-all ${
                     selectedWorkspace?.id === workspace.id
-                      ? "bg-indigo-50 text-indigo-600 shadow-sm"
+                      ? "bg-primary-50 text-primary-600 shadow-sm"
                       : "hover:bg-gray-50 text-gray-700"
                   }`}
                   title={`Workspace ID: ${workspace.id}`}

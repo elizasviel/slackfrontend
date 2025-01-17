@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Add custom color classes */
+@layer base {
+  :root {
+    --color-purple-50: #faf5ff;
+    --color-purple-100: #f3e8ff;
+    --color-purple-200: #e9d5ff;
+    --color-purple-300: #d8b4fe;
+    --color-purple-400: #c084fc;
+    --color-purple-500: #a855f7;
+    --color-purple-600: #611f69; /* Slack's primary purple */
+    --color-purple-700: #4c1d95;
+    --color-purple-800: #3b0764;
+    --color-purple-900: #2e1065;
+  }
+}
+
 @layer components {
   .btn {
     @apply px-4 py-2 rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2;
